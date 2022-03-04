@@ -1,0 +1,20 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Update task{% endblock %}
+
+{% block content %}
+<div class="form-body">
+    <div class="d-flex flex-column w-100 bg-todo m-auto p-lg-2 border border-success rounded-3">
+        <div class="d-flex align-items-center justify-content-center position-relative">
+            <a class="position-absolute start-0 back-arrow" href="{% url 'task-list' %}">
+                <i class="fa-solid fa-arrow-left"></i>
+            </a>
+            <h1 class="text-center">Task Update</h2>
+        </div>
+        <form method="POST">
+            {% csrf_token %} {{form.as_p}}
+            <input class="btn btn-primary" type="submit" value="Update" />
+        </form>
+    </div>
+</div>
+{% endblock %}

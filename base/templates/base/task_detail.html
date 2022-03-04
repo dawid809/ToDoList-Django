@@ -1,0 +1,16 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Task details{% endblock %}
+
+{% block content %}
+<div class="d-flex flex-column w-100 bg-todo m-auto p-lg-2 border border-success rounded-3">
+    <div class="d-flex align-items-center justify-content-center position-relative">
+        <a class="position-absolute start-0 back-arrow" href="{% url 'task-list' %}">
+            <i class="fa-solid fa-arrow-left"></i>
+        </a>
+        <h1 class="text-center">Task detail</h2>
+    </div>
+    <h3>Task name - {{ task.title }}</h3>
+    <h5>Task description - {{ task.description }}</h3>
+</div>
+{% endblock %}

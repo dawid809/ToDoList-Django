@@ -1,0 +1,18 @@
+{% extends 'base/base.html' %}
+{% block title %}Login form{% endblock %}
+
+{%block content %}
+
+<div class="form-body">
+    <div class="d-flex flex-column w-65  bg-todo m-auto p-lg-5 border border-success rounded-3">
+        <h1 class="text-center mb-5">Login</h1>
+        <form method="POST">{% csrf_token %} {{form.as_p}}
+            <input class="btn btn-primary" type="submit" value="Login" />
+        </form>
+        <div class="d-flex align-items-center justify-content-between">
+            <p class="m-1">Don't have an account?<a class="m-1 text-success" href="{% url 'register' %}"> Register</a></p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
