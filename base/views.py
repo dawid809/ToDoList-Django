@@ -14,8 +14,19 @@ from django.contrib.auth import login
 
 from django.urls import reverse_lazy
 
-from .models import Task
+from .models import Action, Task
 # Create your views here.
+
+class ActionList(LoginRequiredMixin,  ListView):
+    model = Action
+    context_object_name = 'actions'
+
+class ActionCreate(LoginRequiredMixin, CreateView):
+    model = Action
+    fields =  '__all__'
+    success_url = reverse_lazy('task-list')
+   # template_name_suffix = 'action_create_form'
+    template_name_suffix = 'task_update_form'
 
 class TaskList(LoginRequiredMixin, ListView):
     model = Task
@@ -40,7 +51,7 @@ class TaskDetail(LoginRequiredMixin, DetailView):
 
 class TaskCreate(LoginRequiredMixin, CreateView):
     model = Task
-    fields =  ['title', 'description', 'complete']
+    fields =  ['title', 'complete']
     success_url = reverse_lazy('task-list')
     template_name_suffix = '_create_form'
 
@@ -50,7 +61,7 @@ class TaskCreate(LoginRequiredMixin, CreateView):
 
 class TaskUpdate(LoginRequiredMixin, UpdateView):
     model = Task
-    fields =  ['title', 'description', 'complete']
+    fields =  ['title', 'complete']
     success_url = reverse_lazy('task-list')
     template_name_suffix = '_update_form'
 

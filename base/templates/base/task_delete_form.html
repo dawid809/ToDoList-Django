@@ -16,7 +16,8 @@
             Are you sure you want to delete "{{task}}"?
         </p>
         {{ form }}
-        <input class="btn btn-danger" type="submit" value="Delete">
+        <!-- return nie dziala przez co usuwa nawet po kliknieciu no -->
+        <input onsubmit="confirm('Are you sure?')"  class="btn btn-danger" type="submit" value="Delete">
     </form>
 </div>
 {% endblock %}
