@@ -11,6 +11,7 @@ class Action(models.Model):
     started_at=models.DateTimeField()
     ended_at=models.DateTimeField()
 
+
 class Task(models.Model):
     user = models.ForeignKey(
         User, on_delete=models.CASCADE, null=True, blank=True)

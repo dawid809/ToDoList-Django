@@ -11,6 +11,8 @@ from django.contrib.auth.views import LoginView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
+from bootstrap_datepicker_plus.widgets import DateTimePickerInput
+
 
 from django.urls import reverse_lazy
 
@@ -26,7 +28,12 @@ class ActionCreate(LoginRequiredMixin, CreateView):
     fields =  '__all__'
     success_url = reverse_lazy('task-list')
    # template_name_suffix = 'action_create_form'
-    template_name_suffix = 'task_update_form'
+    template_name_suffix = '_create_form'
+    def get_form(self):
+        form = super().get_form()
+        form.fields['started_at'].widget = DateTimePickerInput()
+        form.fields['ended_at'].widget = DateTimePickerInput()
+        return form
 
 class TaskList(LoginRequiredMixin, ListView):
     model = Task
