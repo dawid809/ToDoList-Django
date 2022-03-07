@@ -1,3 +1,4 @@
+import re
 from turtle import title
 from django import forms
 from django.forms.widgets import PasswordInput, TextInput
@@ -11,7 +12,7 @@ from django.contrib.auth.views import LoginView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
-from bootstrap_datepicker_plus.widgets import DateTimePickerInput
+from bootstrap_datepicker_plus.widgets import DateTimePickerInput, TimePickerInput
 
 
 from django.urls import reverse_lazy
@@ -19,21 +20,51 @@ from django.urls import reverse_lazy
 from .models import Action, Task
 # Create your views here.
 
-class ActionList(LoginRequiredMixin,  ListView):
+def TwoModels(request):
+    action = Action.objects.all()
+    task = Task.objects.all()
+    return render(request, 'two_models.html', {"Action": action, "Task": task})
+
+class ActionList(LoginRequiredMixin, ListView):
     model = Action
     context_object_name = 'actions'
+    # paginate_by = 5
+    # template_name = 'base/tasks.html'
+    def get_context_data(self, **kwargs):
+        context =  super().get_context_data(**kwargs)
+        context['actions'] = context['actions'].filter(user=self.request.user)
+       # context['count-hours'] = context['actions'].filter()
+        #context['count-hours'] = context['actions'].filter(calctime2=calctime2)
+       # context['actions'] = context['actions'].filter(task)
+        print('print', context['actions'][1].ended_at) #odwolanie do pola ended dla 1 elementu slownika 
+        return context
 
 class ActionCreate(LoginRequiredMixin, CreateView):
     model = Action
-    fields =  '__all__'
-    success_url = reverse_lazy('task-list')
+    fields =  ['name', 'started_at', 'ended_at', 'task']
+    success_url = reverse_lazy('action-list')
+    template_name_suffix = 'action_create_form'
    # template_name_suffix = 'action_create_form'
     template_name_suffix = '_create_form'
+
     def get_form(self):
         form = super().get_form()
-        form.fields['started_at'].widget = DateTimePickerInput()
-        form.fields['ended_at'].widget = DateTimePickerInput()
+        # form.fields['started_at'].widget = DateTimePickerInput()
+        # form.fields['ended_at'].widget = DateTimePickerInput()
+        form.fields['started_at'].widget = TimePickerInput()
+        form.fields['ended_at'].widget = TimePickerInput()
+        form.fields['task'].queryset =  Task.objects.filter(user=self.request.user)
         return form
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        #form.instance.task = self.request.user
+        return super(ActionCreate, self).form_valid(form)
+
+class ActionDelete(LoginRequiredMixin, DeleteView):
+    model = Action
+    success_url = reverse_lazy('action-list')
+    template_name_suffix = '_delete_form'
 
 class TaskList(LoginRequiredMixin, ListView):
     model = Task
@@ -58,7 +89,7 @@ class TaskDetail(LoginRequiredMixin, DetailView):
 
 class TaskCreate(LoginRequiredMixin, CreateView):
     model = Task
-    fields =  ['title', 'complete']
+    fields =  ['title', 'description', 'complete']
     success_url = reverse_lazy('task-list')
     template_name_suffix = '_create_form'
 
@@ -68,7 +99,7 @@ class TaskCreate(LoginRequiredMixin, CreateView):
 
 class TaskUpdate(LoginRequiredMixin, UpdateView):
     model = Task
-    fields =  ['title', 'complete']
+    fields =  ['title', 'description', 'complete']
     success_url = reverse_lazy('task-list')
     template_name_suffix = '_update_form'
 

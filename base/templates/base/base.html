@@ -21,9 +21,9 @@
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
 
-    {% load bootstrap4 %}
-{% bootstrap_css %}
-{% bootstrap_javascript jquery='full' %}
+{% load bootstrap4 %}
+<!-- {% bootstrap_css %} -->
+<!-- {% bootstrap_javascript jquery='full' %} -->
 {{ form.media }}
 
 
@@ -35,7 +35,10 @@
   <header class="header">
     <ul class="d-flex justify-content-between">
       {% if request.user.is_authenticated %}
-      <li><a href="">Home</a></li>
+      <div style="display: flex;">
+        <li><a href="/">Home</a></li>
+      <li><a href="{% url 'action-list' %}">Actions</a></li>
+      </div>
       <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
         aria-haspopup="true" aria-expanded="false">
       <span class="text-capitalize">   ({{request.user}})</h1>
@@ -46,7 +49,7 @@
       </div>
       </div>
       {% else %}
-      <li><a href="">Home</a></li>
+      <li><a href="/">Home</a></li>
       <li><a href="{% url 'login' %}">Login</a></li>
       {% endif %}
     </ul>
