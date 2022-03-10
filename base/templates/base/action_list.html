@@ -1,38 +1,43 @@
 {% extends 'base/base.html' %}
 
-{% block title %}TAction list{% endblock %}
+ {% block title %}Action list{% endblock %} 
 
 {% block content %}
 <div
   class="d-flex flex-column w-75 bg-todo m-auto border border-success rounded-3"
 >
-<div class="task-header">
-  <h1 class="text-center">Hello {{request.user|title}}</h1>
-</div>
+  <div class="task-header">
+    <h1 class="text-center">{{task_name}} - {{request.user}}</h1>
+  </div>
   <div class="task-item-wrapper">
-    <div class="d-flex align-items-center justify-content-between p-3">
-      <a href="{% url 'action-create' %}" class="add-button">
-        <i class="fa-solid fa-plus"></i>
-      </a>
-    </div>
+    <div class="d-flex align-items-center justify-content-between p-3"></div>
+    {% if actions %}
     {% for action in actions %}
     <div class="task-wrapper">
       <div class="task-title">
-       <div style="display: flex;flex-direction: column;">
-        {{action.user}}
-        {{action.name}}
-        {{action.started_at}}
-        {{action.ended_at}}
-        <!-- <div>
-        </div> -->
-
-        <a class="action-icon" href="{% url 'action-delete' action.id %}"
-        ><i class="fa-solid fa-trash"></i
-      ></a>
-       </div>
+        <div style="display: flex;">
+          <div>{{action.name}}</div>
+          <div>
+           <span> {{action.started_at}}</span>
+           <span>{{action.ended_at}}</span>
+           <a  href="{% url 'action-update' action.id %}" class="btn btn-primary">
+            Update
+            </a>
+            <a class="action-icon" href="{% url 'action-delete' action.id %}"
+              ><i class="fa-solid fa-trash"></i
+            ></a>
+          </div>
+        </div>
       </div>
     </div>
     {% endfor %}
+    {% else %}
+    <div class="task-wrapper">
+        <div class="task-title">
+    <p>No actions yet</p>
+        </div>
+    </div>
+    {% endif %}
   </div>
 </div>
 {% endblock %}

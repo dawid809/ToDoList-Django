@@ -34,6 +34,9 @@
         <a  href="{% url 'task-update' task.id %}">{{task}}</a>
       </div>
       {% endif %}
+      <a class="btn btn-dark" href="{% url 'action-list' task.id %}"
+      >Action list</i
+    ></a>
       <a class="action-icon" href="{% url 'task-delete' task.id %}"
         ><i class="fa-solid fa-trash"></i
       ></a>
