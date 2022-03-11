@@ -10,7 +10,16 @@
         </a>
         <h1 class="text-center">Task detail</h2>
     </div>
-    <h3>Task name - {{ task.title }}</h3>
-    <h5>Task description - {{ task.description }}</h3>
+    <h3>Nazwa zadania - {{ task.title }}</h3>
+    <h5>Opis zadania - {{ task.description }}</h3>
+    <h5>Liczba akcji w tasku - {{ action_count }}</h5>
+    <h5>Status zadania - 
+        {% if  task.complete == False %}
+        W trakcie
+        {% else %}
+        Zakończone
+        {% endif %}
+    </h5>
+    <h6>Całkowity czas trwania zadań to {{actions_count}}h</h6>
 </div>
 {% endblock %}

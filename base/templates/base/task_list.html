@@ -4,7 +4,7 @@
 
 {% block content %}
 <div
-  class="d-flex flex-column w-75 bg-todo m-auto border border-success rounded-3"
+  class="d-flex flex-column w-100 bg-todo m-auto border border-success rounded-3"
 >
 <div class="task-header">
   <h1 class="text-center">Hello {{request.user|title}}</h1>
@@ -37,9 +37,13 @@
       <a class="btn btn-dark" href="{% url 'action-list' task.id %}"
       >Action list</i
     ></a>
-      <a class="action-icon" href="{% url 'task-delete' task.id %}"
+      <div style="display:flex; align-items:center;">
+        <a style="margin-right: 10px;" class="action-icon" href="{% url 'task-detail' task.id %}"
+        ><i class="fa-solid fa-circle-info"></i></a>
+        <a class="action-icon" href="{% url 'task-delete' task.id %}"
         ><i class="fa-solid fa-trash"></i
       ></a>
+      </div>
     </div>
     {% endfor %}
   </div>

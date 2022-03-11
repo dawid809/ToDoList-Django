@@ -124,6 +124,17 @@ div .bg-todo {
   font-size: 24px;
 }
 
+
+.fa-circle-info {
+  color: rgb(9, 160, 9);
+  font-size: 24px;
+}
+
+.fa-circle-info:hover {
+  color: rgb(23, 116, 23);
+  font-size: 24px;
+}
+
 .task-item-wrapper {
   background-color: white;
 }

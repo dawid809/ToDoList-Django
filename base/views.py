@@ -1,3 +1,7 @@
+from asyncio.windows_events import NULL
+from datetime import timedelta
+from datetime import datetime
+from multiprocessing import get_context
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
@@ -112,6 +116,31 @@ class TaskList(LoginRequiredMixin, ListView):
 class TaskDetail(LoginRequiredMixin, DetailView):
     model = Task
     context_object_name = 'task'
+
+    def get_context_data(self, **kwargs):
+        print('kwargs: ', kwargs)
+        context = super().get_context_data(**kwargs)
+        task_id = context['task'].id
+        context['action_count'] = Action.objects.filter(task=task_id).count()
+
+        #iterate all actions in task , use calc_time2 and add all
+        actions = Action.objects.filter(task = task_id)
+
+        #zrobic jako osobna funkcje z formatowaniem h/min
+        times = timedelta(0)
+        for action in actions:
+            time = action.calc_time2
+            print('time', time)
+            times += time
+
+        NUM_SECONDS_IN_A_MIN = 60
+        NUM_MIN_IN_A_HOUR = 60
+
+        times = ((times.total_seconds() / NUM_SECONDS_IN_A_MIN)/ NUM_MIN_IN_A_HOUR)
+        print(type(times))
+        # times = strfdelta(times, '{H}:{M:02}', 'm')
+        context['actions_count'] = times
+        return context
 
 
 class TaskCreate(LoginRequiredMixin, CreateView):
