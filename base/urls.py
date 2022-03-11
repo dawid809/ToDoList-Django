@@ -5,17 +5,14 @@ from django.contrib.auth.views import LogoutView
 
 urlpatterns = [ 
     path('', TaskList.as_view(), name='task-list'),
-    # path('task/<int:pk>/', TaskDetail.as_view(), name='task-detail'),
-    #(r'^task-update/?P<int:pk>[\d]+)/$
     path('task-create/', TaskCreate.as_view(), name='task-create'),
     path('task-update/<int:pk>/', TaskUpdate.as_view(), name='task-update'),
     path('task-delete/<int:pk>/', TaskDelete.as_view(), name='task-delete'),
 
-    path('task-update/<int:pk>/action-create/', ActionCreate.as_view(), name='action-create'),
-
+    #path('r^/action-create/(?P<int:task_pk>[\w-]+)/$', ActionCreate.as_view(), name='action-create'),
+    path('action-create/<int:task_pk>/', ActionCreate.as_view(), name='action-create'),
     path('action-list/<int:task_pk>/', ActionList.as_view(), name='action-list'),
     path('action-update/<int:task_pk>/<int:pk>/', ActionUpdate.as_view(), name='action-update'),
-    path('action-update/<int:pk>/', ActionUpdate.as_view(), name='action-update'),
     path('action-delete/<int:task_pk>/<int:pk>/', ActionDelete.as_view(), name='action-delete'),
 
     path('login/', CustomLogin.as_view(), name='login'),

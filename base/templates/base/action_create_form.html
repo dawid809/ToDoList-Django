@@ -1,21 +1,35 @@
 {% extends 'base/base.html' %}
 {% block content %}
-<form method="POST">
-    {% csrf_token %}
-    {{form.as_p}}
-    <input class="btn btn-primary" type="submit" value="Add">
-</form>
+<div class="form-body">
+  <div class="d-flex flex-column w-100 bg-todo m-auto p-lg-2 border border-success rounded-3">
+      <div class="d-flex align-items-center justify-content-center position-relative">
+          <a class="position-absolute start-0 back-arrow" href="{% url 'action-list' view.kwargs.task_pk %}">
+              <i class="fa-solid fa-arrow-left"></i>
+          </a>
+          <h1 class="text-center">Action Create</h1>
+      </div>
+      <form method="POST">
+          {% csrf_token %}
+          {{form.as_p}}
+          <input class="btn btn-primary" type="submit" value="Add">
+      </form>
+  </div>
+</div>
 
-<!-- {{task.actions.all}} -->
 {% endblock %}
 
-{% block modal %}
+  <!-- !!!!!!!!!!Modal Layot!!!!!!!!!! -->
+
+  <!-- {% block modal %}
 <div>
     <form method="POST">
         {% csrf_token %}
         {{form.as_p}}
         <input class="btn btn-primary" type="submit" value="Add">
     </form>
+</div>
+{% endblock %} -->
+
     <!-- <button data-bs-toggle="modal" data-bs-target="#models-action">Add action</button> -->
             <!-- <div class="modal fade" tabindex="-1" id="models-action" data-bs-backdrop="static"  data-bs-keyboard="false">
                 <div class="modal-dialog">
@@ -34,5 +48,3 @@
                   </div>
                 </div>
               </div> -->
-</div>
-{% endblock %}
