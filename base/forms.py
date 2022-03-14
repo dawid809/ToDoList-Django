@@ -1,7 +1,6 @@
-from collections import UserDict
-from .models import Action, Task
+from .models import Action
 from django import forms
-from bootstrap_datepicker_plus.widgets import DateTimePickerInput, TimePickerInput
+from bootstrap_datepicker_plus.widgets import TimePickerInput
 
 class ActionForm(forms.ModelForm):
     def clean(self):

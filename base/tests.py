@@ -1,15 +1,7 @@
-from asyncio import tasks
 from audioop import reverse
-from datetime import datetime, timedelta, timezone, time
-from importlib.util import resolve_name
+from datetime import  time
 from pydoc import resolve
-from turtle import title
-from types import resolve_bases
-from xmlrpc.server import resolve_dotted_attribute
-from django.forms import ValidationError
-from django.shortcuts import resolve_url
 from django.test import SimpleTestCase, TestCase, Client
-from base.forms import ActionForm
 
 from base.views import ActionCreate, ActionDelete, ActionList, ActionUpdate, RegisterPage, TaskCreate, TaskDelete, TaskDetail, TaskList, TaskUpdate, CustomLogin
 from django.contrib.auth.views import LogoutView
@@ -19,7 +11,6 @@ from django.urls import reverse, resolve
 from django.contrib.auth.models import User
 from django.db.models.functions import Upper
 # Create your tests here.
-import pytest
 class TestUrls(SimpleTestCase):
     
     def test_todo_task_list_url_resolves(self):
@@ -106,7 +97,7 @@ class TestModels(TestCase):
         task_init = Task.objects.create(user=user_init, title="Task title 1", description="Task description 11111")
         t_start = '12:11:00'
         t_end = '13:11:00'
-        action_init = Action.objects.create(user=User.objects.get(username="dawid123"), name="action 1", started_at=t_start, ended_at=t_end,task = task_init)
+        action_init = Action.objects.create(name="action 1", started_at=t_start, ended_at=t_end,task = task_init)
 
         print(user_init, task_init, action_init)
 
@@ -158,11 +149,6 @@ class TestModels(TestCase):
         max_length = action._meta.get_field('name').max_length
         self.assertEqual(max_length, 50)
 
-    def test_action_user_username_value(self):
-        user = Action.objects.get(id=1).user.username
-        user_username = "dawid123"
-        self.assertEqual(user, user_username)
-
     def test_action_name_value(self):
         action = Action.objects.get(id=1).name
         action_name = 'action 1'
@@ -198,57 +184,47 @@ class TestModels(TestCase):
 
     """Test Model Label Name"""
     
-    def test_user_label(self):
+    def test_task_user_label(self):
         task = Task.objects.get(id=1)
         field_label = task._meta.get_field('user').verbose_name
         self.assertEqual(field_label, 'user')
 
-    def test_title_label(self):
-        task = Task.objects.get(id=1)
-        field_label = task._meta.get_field('title').verbose_name
-        self.assertEqual(field_label, 'title')
-
-    def test_title_label(self):
+    def test_task_title_label(self):
         task = Task.objects.get(id=1)
         field_label = task._meta.get_field('title').verbose_name
         self.assertEqual(field_label, 'title')
     
-    def test_description_label(self):
+    def test_task_description_label(self):
         task = Task.objects.get(id=1)
         field_label = task._meta.get_field('description').verbose_name
         self.assertEqual(field_label, 'description')
 
-    def test_complete_label(self):
+    def test_task_complete_label(self):
         task = Task.objects.get(id=1)
         field_label = task._meta.get_field('complete').verbose_name
         self.assertEqual(field_label, 'complete')
 
-    def test_created_label(self):
+    def test_task_created_label(self):
         task = Task.objects.get(id=1)
         field_label = task._meta.get_field('created').verbose_name
         self.assertEqual(field_label, 'created')
 
-    def test_user_label(self):
-        action = Action.objects.get(id=1)
-        field_label = action._meta.get_field('user').verbose_name
-        self.assertEqual(field_label, 'user')
-
-    def test_name_label(self):
+    def test_action_name_label(self):
         action = Action.objects.get(id=1)
         field_label = action._meta.get_field('name').verbose_name
         self.assertEqual(field_label, 'name')
 
-    def test_started_at_label(self):
+    def test_action_started_at_label(self):
         action = Action.objects.get(id=1)
         field_label = action._meta.get_field('started_at').verbose_name
         self.assertEqual(field_label, 'started at')
 
-    def test_ended_at_label(self):
+    def test_action_ended_at_label(self):
         action = Action.objects.get(id=1)
         field_label = action._meta.get_field('ended_at').verbose_name
         self.assertEqual(field_label, 'ended at')
 
-    def test_task_label(self):
+    def test_action_task_label(self):
         action = Action.objects.get(id=1)
         field_label = action._meta.get_field('task').verbose_name
         self.assertEqual(field_label, 'task')

@@ -1,10 +1,5 @@
-from asyncio.windows_events import NULL
 from datetime import timedelta
-from datetime import datetime
-from math import ceil
-from multiprocessing import get_context
-from django.forms import ValidationError
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import redirect
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormView
@@ -13,18 +8,11 @@ from django.contrib.auth.views import LoginView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
-from bootstrap_datepicker_plus.widgets import DateTimePickerInput, TimePickerInput
-
-from django.contrib.auth.models import User
-
-
 from django.urls import reverse_lazy
-
 from base.forms import ActionForm
-
 from .models import Action, Task
-# Create your views here.
 
+# Create your views here.
 
 class ActionList(LoginRequiredMixin, ListView):
     model = Action
@@ -72,7 +60,6 @@ class ActionCreate(LoginRequiredMixin, CreateView):
 
     # ustawia dane bez formularza
     def form_valid(self, form):
-        form.instance.user = self.request.user
         # get zamiast filter
         # get zwraca konkretny obiekt natiomiast filter queryset z obiektem
         # task_id = Task.objects.filter(id = self.kwargs['task_pk']) 
