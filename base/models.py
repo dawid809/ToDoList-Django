@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta, date
 import datetime
+from msilib.schema import Error
 from tkinter import CASCADE
 from django.db import models
 from django.contrib.auth.models import User
@@ -30,6 +31,21 @@ class Action(models.Model):
     name = models.CharField(max_length=50)
     started_at=models.TimeField()
     ended_at=models.TimeField()
+
+    task = models.ForeignKey(Task, on_delete=models.CASCADE, related_name="actions")
+
+    def __str__(self):
+        return self.name
+
+
+
+    # def clean(self):
+
+    #     if self.cleaned_data['started_at'] >= self.cleaned_data['ended_at']:
+    #         print('start greate than end')
+    #         raise Error("start > end")
+
+
 
     # @property
     # def calc_time(self):
@@ -79,7 +95,3 @@ class Action(models.Model):
     #     return diff
 
     #different = substract_time(self)
-    task = models.ForeignKey(Task, on_delete=models.CASCADE, related_name="actions")
-
-    def __str__(self):
-        return self.name

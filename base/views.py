@@ -1,7 +1,9 @@
 from asyncio.windows_events import NULL
 from datetime import timedelta
 from datetime import datetime
+from math import ceil
 from multiprocessing import get_context
+from django.forms import ValidationError
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
@@ -90,6 +92,15 @@ class ActionUpdate(LoginRequiredMixin, UpdateView):
         form.fields['started_at'].widget = TimePickerInput()
         form.fields['ended_at'].widget = TimePickerInput()
         return form
+    
+    def form_valid(self, form):
+        print('cleaned-data', form.cleaned_data)
+        if form.instance.started_at >= form.instance.ended_at:
+            form.instance.started_at
+            #raise ValidationError('S>E')
+        print(form.instance.started_at)
+        return super(ActionUpdate, self).form_valid(form)
+        
 
 
 class ActionDelete(LoginRequiredMixin, DeleteView):
@@ -136,7 +147,7 @@ class TaskDetail(LoginRequiredMixin, DetailView):
         NUM_SECONDS_IN_A_MIN = 60
         NUM_MIN_IN_A_HOUR = 60
 
-        times = ((times.total_seconds() / NUM_SECONDS_IN_A_MIN)/ NUM_MIN_IN_A_HOUR)
+        times = ceil((times.total_seconds() / NUM_SECONDS_IN_A_MIN)/ NUM_MIN_IN_A_HOUR)
         print(type(times))
         # times = strfdelta(times, '{H}:{M:02}', 'm')
         context['actions_count'] = times
