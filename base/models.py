@@ -4,7 +4,7 @@ from msilib.schema import Error
 from tkinter import CASCADE
 from django.db import models
 from django.contrib.auth.models import User
-
+from django.forms import ValidationError
 from django.db.models.functions import Upper
 
 # Create your models here.
@@ -45,7 +45,9 @@ class Action(models.Model):
     #         print('start greate than end')
     #         raise Error("start > end")
 
-
+    # def clean(self):
+    #     print('self', self.cleaned_data.get('started_at'))
+            #raise ValidationError({"ended_at": "End date must be higher than start date!"})
 
     # @property
     # def calc_time(self):
@@ -61,6 +63,9 @@ class Action(models.Model):
         d_start = datetime.datetime.combine(date, self.started_at)
         d_end = datetime.datetime.combine(date, self.ended_at)
         print(type(d_start), type(d_end))
+        # if d_start > d_end:
+        #     time_elapsed = d_start - d_end
+        # else:
         time_elapsed = d_end - d_start
         return time_elapsed
 

@@ -20,6 +20,8 @@ from django.contrib.auth.models import User
 
 from django.urls import reverse_lazy
 
+from base.forms import ActionForm
+
 from .models import Action, Task
 # Create your views here.
 
@@ -30,13 +32,10 @@ class ActionList(LoginRequiredMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context =  super().get_context_data(**kwargs)
-        print(kwargs)
         context['actions'] = context['actions'].filter(task = self.kwargs['task_pk'])
         name = Task.objects.get(id=self.kwargs['task_pk'])
         context['task_name'] = name
-        print(context)
         return context
-
 
 # ModelFormMixin , FormMixin
     # hidden
@@ -44,64 +43,50 @@ class ActionList(LoginRequiredMixin, ListView):
     # id task by pattern(?=123)
 class ActionCreate(LoginRequiredMixin, CreateView):
     model = Action
-    fields =  ['name', 'started_at', 'ended_at', 'user', 'task']
+    form_class = ActionForm
     template_name_suffix = '_create_form'
   
     def get_success_url(self):
         task_id=self.kwargs['task_pk']
         return reverse_lazy('action-list', kwargs={'task_pk': task_id})
 
-    def get_initial(self):
-        initial = super().get_initial()
-        print('kwargs: ',self.kwargs)
-        initial['task'] = self.kwargs['task_pk']
-        initial['user'] = self.request.user
-        return initial
+    # # ustawia wartość selecta
+    # def get_initial(self):
+    #     initial = super().get_initial()
+    #     print('kwargs: ',self.kwargs)
+    #     initial['task'] = self.kwargs['task_pk']
+    #     initial['user'] = self.request.user
+    #     return initial
 
-    def get_form(self):
-        form = super().get_form()
-        # form.fields['started_at'].widget = DateTimePickerInput()
-        # form.fields['ended_at'].widget = DateTimePickerInput()
-        form.fields['started_at'].widget = TimePickerInput()
-        form.fields['ended_at'].widget = TimePickerInput()
-        form.fields['task'].queryset = Task.objects.filter(id = self.kwargs['task_pk'])
-        form.fields['user'].queryset = User.objects.filter(username = self.request.user)
-        return form
 
+    # # filtruje możliwe opcje w select
+    # def get_form(self):
+    #     form = super().get_form()
+    #     # form.fields['started_at'].widget = DateTimePickerInput()
+    #     # form.fields['ended_at'].widget = DateTimePickerInput()
+    #     # form.fields['started_at'].widget = TimePickerInput()
+    #     # form.fields['ended_at'].widget = TimePickerInput()
+    #     form.fields['task'].queryset = Task.objects.filter(id = self.kwargs['task_pk'])
+    #     form.fields['user'].queryset = User.objects.filter(username = self.request.user)
+    #     return form
+
+    # ustawia dane bez formularza
     def form_valid(self, form):
         form.instance.user = self.request.user
+        # get zamiast filter
+        # get zwraca konkretny obiekt natiomiast filter queryset z obiektem
+        # task_id = Task.objects.filter(id = self.kwargs['task_pk']) 
+        form.instance.task = Task.objects.get(id = self.kwargs['task_pk'])
         return super(ActionCreate, self).form_valid(form)
-        
 
 class ActionUpdate(LoginRequiredMixin, UpdateView):
     model = Action
-    fields =  ['name', 'started_at', 'ended_at']
+    form_class = ActionForm
     template_name_suffix = '_update_form'
 
     def get_success_url(self):
         task_id=self.kwargs['task_pk']
         return reverse_lazy('action-list', kwargs={'task_pk': task_id})
-
-    def get_initial(self):
-        print(self.kwargs)
-        print('id_taska = ', self.kwargs['task_pk'])
-        return super().get_initial()
-
-    def get_form(self):
-        form = super().get_form()
-        form.fields['started_at'].widget = TimePickerInput()
-        form.fields['ended_at'].widget = TimePickerInput()
-        return form
-    
-    def form_valid(self, form):
-        print('cleaned-data', form.cleaned_data)
-        if form.instance.started_at >= form.instance.ended_at:
-            form.instance.started_at
-            #raise ValidationError('S>E')
-        print(form.instance.started_at)
-        return super(ActionUpdate, self).form_valid(form)
-        
-
 
 class ActionDelete(LoginRequiredMixin, DeleteView):
     model = Action

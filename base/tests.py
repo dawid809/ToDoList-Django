@@ -30,6 +30,7 @@ class TestUrls(SimpleTestCase):
 
     def test_todo_task_delete_resolver(self):
         url = reverse('task-delete', args=[2])
+        print(url)
         self.assertEquals(resolve(url).func.view_class, TaskDelete)
 
     def test_todo_login_resolver(self):
