@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "bootstrap4",
     "bootstrap_datepicker_plus",
     'coverage',
+    #'DJANGO_SETTINGS_MODULE',
 ]
 
 MIDDLEWARE = [

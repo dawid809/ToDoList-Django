@@ -8,12 +8,14 @@ urlpatterns = [
     path('task-create/', TaskCreate.as_view(), name='task-create'),
     path('task-update/<int:pk>/', TaskUpdate.as_view(), name='task-update'),
     # path('task-delete/<int:pk>/', TaskDelete.as_view(), name='task-delete'),
-    path(r'^task-delete/(?P<int:pk>[0-9]+)/$', TaskDelete.as_view(), name='task-delete'),
-    path(r'^task-detail/(?P<int:pk>[0-9]+)/$', TaskDetail.as_view(), name='task-detail'),
+    path('task-delete/<int:pk>/', TaskDelete.as_view(), name='task-delete'),
+    # path(r'^task-delete/(?P<int:pk>[0-9]+)/$', TaskDelete.as_view(), name='task-delete'),
+    path('task-detail/<int:pk>/', TaskDetail.as_view(), name='task-detail'),
+    # path(r'^task-detail/(?P<int:pk>[0-9]+)/$', TaskDetail.as_view(), name='task-detail'),
 
     #path('r^/action-create/(?P<int:task_pk>[\w-]+)/$', ActionCreate.as_view(), name='action-create'),
-    path('action-create/<int:task_pk>/', ActionCreate.as_view(), name='action-create'),
     path('action-list/<int:task_pk>/', ActionList.as_view(), name='action-list'),
+    path('action-create/<int:task_pk>/', ActionCreate.as_view(), name='action-create'),
     path('action-update/<int:task_pk>/<int:pk>/', ActionUpdate.as_view(), name='action-update'),
     path('action-delete/<int:task_pk>/<int:pk>/', ActionDelete.as_view(), name='action-delete'),
 

@@ -90,8 +90,11 @@ class ActionUpdate(LoginRequiredMixin, UpdateView):
 
 class ActionDelete(LoginRequiredMixin, DeleteView):
     model = Action
-    success_url = reverse_lazy('task-list')
     template_name_suffix = '_delete_form'
+
+    def get_success_url(self):
+        task_id=self.kwargs['task_pk']
+        return reverse_lazy('action-list', kwargs={'task_pk': task_id})
 
 
 class TaskList(LoginRequiredMixin, ListView):
@@ -119,22 +122,16 @@ class TaskDetail(LoginRequiredMixin, DetailView):
         task_id = context['task'].id
         context['action_count'] = Action.objects.filter(task=task_id).count()
 
-        #iterate all actions in task , use calc_time2 and add all
         actions = Action.objects.filter(task = task_id)
 
-        #zrobic jako osobna funkcje z formatowaniem h/min
         times = timedelta(0)
         for action in actions:
-            time = action.calc_time2
+            time = action.calc_time_substract
             print('time', time)
             times += time
 
-        NUM_SECONDS_IN_A_MIN = 60
-        NUM_MIN_IN_A_HOUR = 60
-
-        times = ceil((times.total_seconds() / NUM_SECONDS_IN_A_MIN)/ NUM_MIN_IN_A_HOUR)
-        print(type(times))
-        # times = strfdelta(times, '{H}:{M:02}', 'm')
+        times = Action.format_timedelta(times)
+        
         context['actions_count'] = times
         return context
 
