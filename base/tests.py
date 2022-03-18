@@ -10,7 +10,9 @@ from django.urls import reverse, resolve
 
 from django.contrib.auth.models import User
 from django.db.models.functions import Upper
+
 # Create your tests here.
+
 class TestUrls(SimpleTestCase):
     
     def test_todo_task_list_url_resolves(self):

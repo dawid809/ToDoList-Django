@@ -17,7 +17,10 @@
         </p>
         {{ form }}
         <!-- return nie dziala przez co usuwa nawet po kliknieciu no -->
-        <input onsubmit="confirm('Are you sure?')"  class="btn btn-danger" type="submit" value="Delete">
+        <input class="btn btn-danger" type="submit" value="Yes">
+        <a class="btn btn-primary" href="{% url 'action-list' action.task.id %}">
+            Cancel
+        </a>
     </form>
 </div>
 {% endblock %}
