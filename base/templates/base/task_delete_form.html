@@ -3,24 +3,26 @@
 {% block title %}Task delete{% endblock %}
 
 {% block content %}
-<div class="d-flex flex-column w-100 bg-todo m-auto p-lg-2 border border-success rounded-3">
-    <div class="d-flex align-items-center justify-content-center position-relative">
-        <a class="position-absolute start-0 back-arrow" href="{% url 'task-list' %}">
+<div class="context-wrapper" style="width: 600px;">
+    <div class="context-header-wrapper">
+        <a class="back-icon" href="{% url 'task-list' %}">
             <i class="fa-solid fa-arrow-left"></i>
         </a>
         <h1 class="text-center">Task delete</h1>
     </div>
-    <form method="POST">
-        {% csrf_token %}
-        <p>
-            Are you sure you want to delete "{{task}}"?
-        </p>
-        {{ form }}
-        <!-- return nie dziala przez co usuwa nawet po kliknieciu no -->
-        <input class="btn btn-danger" type="submit" value="Yes">
-        <a class="btn btn-primary" href="{% url 'task-list' %}">
-            Cancel
-        </a>
-    </form>
+    <div class="context-body-wrapper">
+        <form method="POST" class="form-delete-wrapper">
+            {% csrf_token %}
+            <p>
+                Are you sure you want to delete <span>"{{task}}"</span>?
+            </p>
+            <div class="delete-options">
+                <a class="button-cancel" href="{% url 'task-list' %}">
+                    Cancel
+                </a>
+                <button class="button-delete-confirm" type="submit">Delete</button>
+            </div>
+        </form>
+    </div>
 </div>
 {% endblock %}

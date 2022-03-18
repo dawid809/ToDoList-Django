@@ -4,15 +4,20 @@
 
 {% block content %}
 
-<div class="form-body">
-    <div class="d-flex flex-column w-100  bg-todo m-auto p-lg-5 border border-success rounded-3">
-        <h1 class="text-center mb-5">Register</h1>
-        <form method="POST">
+<div class="context-wrapper"  style="width: 700px;">
+    <div class="context-header-wrapper">
+        <h2>Register</h2>
+    </div>
+    <div class="context-body-wrapper">
+        <form method="POST" class="form-wrapper">
             {% csrf_token %}
-            {{form.as_p}}
-            <input class="btn btn-success" type="submit" value="Register">
+            {{form}}
+            <button class="button-submit" type="submit">Register</button>
         </form>
-        <p>Already have an account?<a class="m-1 text-primary" href="{% url 'login' %}">Login</a></p>
+        <div class="options-wrapper">
+            <p>Already have an account?</p>
+            <a href="{% url 'login' %}">Login now</a>
+        </div>
     </div>
 </div>
 {% endblock %}

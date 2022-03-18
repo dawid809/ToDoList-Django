@@ -3,42 +3,19 @@
 {% block title %}Update task{% endblock %}
 
 {% block content %}
-<div class="form-body">
-    <div class="d-flex flex-column w-100 bg-todo m-auto p-lg-2 border border-success rounded-3">
-        <div class="d-flex align-items-center justify-content-center position-relative">
-            <a class="position-absolute start-0 back-arrow" href="{% url 'task-list' %}">
-                <i class="fa-solid fa-arrow-left"></i>
-            </a>
-            <h1 class="text-center">Task Update</h2>
-        </div>
-        <form method="POST">
-            {% csrf_token %} {{form.as_p}}
-            <input class="btn btn-primary" type="submit" value="Update" />
+<div class="context-wrapper"  style="width:700px">
+    <div class="context-header-wrapper">
+        <a class="back-icon" href="{% url 'task-list' %}">
+            <i class="fa-solid fa-arrow-left"></i>
+        </a>
+        <h1 class="text-center">Task Update</h2>
+    </div>
+      <div class="context-body-wrapper">
+        <form method="POST" class="form-wrapper">
+            {% csrf_token %}
+            {{form}}
+            <button class="button-submit" type="submit">Update</button>
         </form>
-        <!-- <input class="btn btn-primary" value="Add action" data-bs-toggle="modal" data-bs-target="#models-action" style="position: absolute; bottom:30px; right: 30px;width: 120px;">
-        <div class="modal fade" tabindex="-1" id="models-action" data-bs-backdrop="static"  data-bs-keyboard="false">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title">Modal title</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form method="POST">
-                        {% csrf_token %}
-                        {{form.as_p}}
-                        <input class="btn btn-primary" type="submit" value="Add">
-                    </form>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        {% block modal %} -->
-        {% endblock %}
-      </div>
+    </div>
 </div>
 {% endblock %}

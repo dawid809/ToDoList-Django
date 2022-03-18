@@ -1,19 +1,32 @@
 :root {
   --black: black;
   --white: white;
-  --green-light: #e5fcf5;
-  --green: #b3dec1;
-  --green-dark: rgba(42, 208, 137, 0.6);
-  --green-bg-todo: #c9ebc9;
+  --gray-lighter:#999;
+  --gray-light: #777;
+  --gray: #555;
+  --gray-dark: #333;
+  --gray-darker: #111;
+  --main: #ef6c05;
+  --main-hover: #fa7713;
+  --green: #59b81d;
+  --green-hover: #7cdf3d;
+  --red: #e3242b;
+  --red-hover: #fd3339;
+  --blue: #5ab0c4;
+  --blue-hover: #63c5da;
 }
 
 body {
-  background-color: var(--green-light);
+  background-color: var(--gray);
+  color: var(--white);
+  box-sizing: border-box;
 }
 
+/* Header */
+
 .header {
-  background-color: var(--green);
-  border-bottom: 1px solid var(--green-dark);
+  background-color: var(--gray-dark);
+  border-bottom: 1px solid var(--gray-darker);
   height: 60px;
   position: fixed;
   top: 0;
@@ -42,7 +55,7 @@ body {
 .header ul li a {
   text-decoration: none;
   font-size: 20px;
-  color: var(--black);
+  color: var(--white);
   text-align: center;
   margin: auto;
   width: 100%;
@@ -50,163 +63,336 @@ body {
 }
 
 .header ul li a:hover {
-  background-color: var(--green-light);
+  background-color: var(--gray);
 }
 
-.main-container {
-  display: flex;
-  flex-direction: column;
-  margin-top: 60px;
-}
 
 .header #dropdownMenuLink {
   text-decoration: none;
   font-size: 20px;
-  color: var(--black);
+  color: var(--white);
   text-align: center;
   padding: 10px;
 }
 
 .header #dropdownMenuLink:hover {
-  background-color: var(--green-light);
+  background-color: var(--gray);
 }
 
 .dropdown-menu {
-  background-color: var(--green-bg-todo);
+  background-color: var(--gray-light);
 }
 
-.dropdown-item:hover {
-  background-color: var(--green-light);
-}
-
-.fa-solid {
-  font-size: 30px;
-  color: var(--black);
-}
-
-.fa-solid:hover {
-  font-size: 30px;
+.dropdown-item {
   color: var(--white);
 }
 
-.fa-solid.fa-plus {
-  font-size: 40px;
-  color: #2b9348;
+.dropdown-item:hover {
+  background-color: var(--main);
+  color: var(--white);
 }
 
-.fa-solid.fa-plus:hover {
-  color: #aacc00;
+/* Context */
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 120px;
+  position: relative;
+  align-items: center;
+  justify-content: center;
 }
 
-div .bg-todo {
-  background-color: var(--green-bg-todo);
-}
-.task-header {
-  background-color: var(--green-bg-todo);
-  padding: 30px 5px;
-}
-
-.fa-solid.fa-arrow-left {
-  margin-left: 10px;
+.context-wrapper {
+border: 1px solid var(--black);
+border-radius: 12px;
+overflow: hidden;
+width: 500px;
 }
 
-.action-icon {
-  margin: 0 5px;
+.context-header-wrapper {
+display: flex;
+align-items: center;
+justify-content: center;
+position: relative;
+background-color: var(--gray-darker);
+padding: 20px 50px 20px 50px;
 }
 
-.fa-trash {
-  color: #ee4b2b;
-  font-size: 24px;
+.context-header-wrapper h2 {
+text-transform: uppercase;
 }
 
-.fa-trash:hover {
-  color: #aa4a44;
-  font-size: 24px;
+.context-body-wrapper {
+  padding: 20px 50px;
+  background-color: var(--gray-dark);
 }
 
+/* List item*/
 
-.fa-circle-info {
-  color: rgb(9, 160, 9);
-  font-size: 24px;
+.list-wrapper {
+  background-color: var(--gray-dark);
 }
 
-.fa-circle-info:hover {
-  color: rgb(23, 116, 23);
-  font-size: 24px;
-}
-
-.task-item-wrapper {
-  background-color: white;
-}
-
-.task-wrapper {
+.single-item-wrapper {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 20px;
-  border-top: 1px solid whitesmoke;
+  border-top: 1px solid var(--gray-light);
 }
 
-.task-title {
+.item-title {
   display: flex;
   align-items: center;
 }
 
-.task-title a {
+.item-title a {
   text-decoration: none;
-  color: black;
+  color: inherit;
   margin-left: 10px;
-  font-size: 20px;
+  font-size: 24px;
 }
 
-.task-title a:hover { 
-color: #2b9348;
+.item-title a:hover { 
+  color: var(--main-hover);
 }
 
 .task-complete-icon {
-  height: 25px;
-  width: 25px;
-  background-color: #55a630;
+  height: 30px;
+  width: 30px;
+  background-color: var(--green-hover);
+  border: solid var(--green);
   border-radius: 50%;
+}
+
+.task-complete-icon:hover {
+  cursor: pointer;
+  background-color: var(--gray-lighter);
+  border: solid var(--gray-light);
 }
 
 .task-incomplete-icon {
-  height: 25px;
-  width: 25px;
-  background-color: #999;
-  border: thin #333;
+  height: 30px;
+  width: 30px;
+  background-color: var(--gray-lighter);
+  border: solid var(--gray-light);
   border-radius: 50%;
 }
 
-.form-body {
-  padding: 20px;
+.task-incomplete-icon:hover {
+  cursor: pointer;
+  background-color: var(--green-hover);
+  border: solid var(--green);
 }
 
-.form-body input[type="text"],
-input[type="password"], textarea {
-  border-radius: 5px;
-  padding: 10px;
-  width: 100%;
+.item-actions-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.form-body input[type="checkbox"]:checked + :before  {
-  padding: 5px;
-  color: red;
-  background-color: red;
+.item-actions-wrapper a {
+  margin: 0 5px;
 }
 
-.form-body label {
-  padding: 10px;
-  display: block;
+.item-actions-wrapper i {
+  font-size: 26px;
+  color: var(--gray-lighter);
 }
 
-.search-task input{
-padding: 7px 10px;
-border: 1px solid black;
-border-radius: 4px;
+/* List item */
+/* Icons */
+
+.fa-list:hover {
+  color: var(--blue-hover);
+}
+
+.fa-circle-info:hover {
+  color: var(--green-hover);
+}
+
+.fa-trash:hover {
+  color: var(--red-hover);
+}
+
+.add-icon {
+  font-size:  36px;
+  color: var(--gray-lighter);
+}
+
+.add-icon:hover {
+  color: var(--green-hover);
+}
+
+.back-icon {
+  position: absolute;
+  left:20px;
+  font-size: 30px;
+  color: var(--gray-lighter);
+}
+
+.back-icon:hover {
+  color: var(--main)
+}
+
+/* List item */
+/* Search */
+
+.add-and-search-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30px;
+  font-size: 18px;
+}
+
+.search-task input[type="text"]{
+  padding: 12px 24px;
+  border: 1px solid var(--gray-lighter);
+  border-radius: 4px;
+  color: inherit;
+  outline: none;
+  background-color: inherit;
+  }
+
+.search-task input[type="text"]:hover, .search-task input[type="text"]:focus {
+  border-radius: 0;
+  border-color: var(--main);
 }
 
 .search-task input[type="submit"] {
-color:#2b9348;
-font-weight: bold;
+  width: 150px;
+  padding: 12px 24px;
+  border-radius: 4px;
+  border: 1px solid var(--gray-darker);
+  background-color: var(--main);
+  color: inherit;
 }
+
+.search-task input[type="submit"]:hover {
+  background-color: var(--main-hover);
+}
+
+/* Forms */
+
+.form-wrapper {
+}
+
+.form-wrapper label {
+  font-size: 16px;
+  color: var(--gray-ligther);
+  margin: 14px 0 7px 0;
+}
+
+.form-wrapper input, textarea {
+  border-radius: 5px;
+  padding: 12px 7px;
+  width: 100%;
+  border: 1px solid var(--gray-lighter);
+  outline: none;
+  background-color: var(--gray-dark);
+  color: var(--white);
+}
+
+.form-wrapper input:hover, .form-wrapper input:focus,
+.form-wrapper textarea:hover, .form-wrapper:focus {
+ border-radius: 0;
+ border-color: var(--main);
+}
+
+.form-wrapper .button-submit {
+  margin-top: 20px;
+  align-self: center;
+  background-color: var(--main);
+  padding: 12px 7px;
+  width: 100%;
+  color: var(--white);
+  font-size: 20px;
+  border: 1px solid var(--black);
+  border-radius: 20px;
+}
+
+.form-wrapper .button-submit:hover {
+background-color: var(--main-hover);
+}
+
+.form-wrapper input[type="checkbox"] {
+  float: left;
+}
+
+/* Forms */
+/* Register/Login */
+
+.options-wrapper {
+display: flex;
+margin-top: 20px;
+}
+
+.options-wrapper p {
+  margin-right: 10px;
+}
+
+.options-wrapper a {
+  color: var(--green);
+  text-decoration: none;
+}
+
+.options-wrapper a:hover {
+  color: var(--green-hover);
+  text-decoration: underline;
+}
+
+/* Forms */
+/* Delete item */
+
+.form-delete-wrapper {
+
+}
+
+.form-delete-wrapper p{
+font-size: 20px;
+font-style: italic;
+}
+
+.form-delete-wrapper p span{
+  font-style: bold;
+  color: var(--main);
+}
+
+.delete-options {
+  display: flex;
+  align-items: center;
+}
+
+.button-cancel {
+  width: 90px;
+  text-align: center;
+  padding: 7px 14px;
+  border-radius: 6px;
+  border: 1px solid var(--gray-darker);
+  background-color: var(--gray-light);
+  color: var(--black);
+  text-decoration: none;
+  margin-right:10px ;
+}
+
+.button-cancel:hover {
+background-color: var(--gray-lighter);
+color: var(--black);
+}
+
+
+.button-delete-confirm {
+  width: 90px;
+  text-align: center;
+  padding: 7px 14px;
+  border-radius: 6px;
+  border: 1px solid var(--gray-darker);
+  background-color: var(--red);
+  color: var(--white);
+  }
+  
+  .button-delete-confirm:hover {
+  background-color: var(--red-hover);
+  }

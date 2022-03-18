@@ -3,74 +3,48 @@
 {% block title %}Tasks list{% endblock %}
 
 {% block content %}
-<div
-  class="d-flex flex-column w-100 bg-todo m-auto border border-success rounded-3"
->
-<div class="task-header">
-  <h1 class="text-center">Hello {{request.user|title}}</h1>
-  <h3 class="text-center">You have {{count}} incompleted task</h3>
-</div>
-  <div class="task-item-wrapper">
-    <div class="d-flex align-items-center justify-content-between p-3">
+<div class="context-wrapper" style="width:800px">
+  <div class="context-header-wrapper" style="flex-direction: column;">
+    <h2>Hello {{request.user|title}}</h2>
+    <h4>You have {{count}} incompleted task</h4>
+  </div>
+  <div class="list-wrapper">
+    <div class="add-and-search-wrapper">
       <form method="GET" class="search-task">
         <input type="text" name="search-area" value="{{search_input}}" />
         <input type="submit" value="Search" />
       </form>
-      <a href="{% url 'task-create' %}" class="add-button">
+      <a href="{% url 'task-create' %}" class="add-icon">
         <i class="fa-solid fa-plus"></i>
       </a>
     </div>
     {% for task in tasks %}
-    <div class="task-wrapper">
+    <div class="single-item-wrapper">
       {% if task.complete %}
-      <div class="task-title">
+      <div class="item-title">
         <div class="task-complete-icon"></div>
         <s><a href="{% url 'task-update' task.id %}"><i>{{task}}</i></a
         ></s>
       </div>
       {% else %}
-      <div class="task-title">
+      <div class="item-title">
         <div class="task-incomplete-icon"></div>
         <a  href="{% url 'task-update' task.id %}">{{task}}</a>
       </div>
       {% endif %}
-      <a class="btn btn-dark" href="{% url 'action-list' task.id %}"
-      >Action list</i
-    ></a>
-      <div style="display:flex; align-items:center;">
-        <a style="margin-right: 10px;" class="action-icon" href="{% url 'task-detail' task.id %}"
-        ><i class="fa-solid fa-circle-info"></i></a>
-        <a class="action-icon" href="{% url 'task-delete' task.id %}"
-        ><i class="fa-solid fa-trash"></i
-      ></a>
+      <div class="item-actions-wrapper">
+        <a href="{% url 'action-list' task.id %}">
+          <i class="fa-solid fa-list"></i>
+        </a>
+        <a href="{% url 'task-detail' task.id %}">
+          <i class="fa-solid fa-circle-info"></i>
+        </a>
+        <a href="{% url 'task-delete' task.id %}">
+          <i class="fa-solid fa-trash"></i>
+        </a>
       </div>
     </div>
     {% endfor %}
   </div>
 </div>
 {% endblock %}
-
-<!-- <table class="table">
-    <thead class="table-dark">
-      <tr>
-        <th scope="col">Name</th>
-        <th scope="col">Description</th>
-        <th scope="col">Actions</th>
-      </tr>
-    </thead>
-    <tbody class="table-light">
-      {% for task in tasks %}
-      <tr>
-        <td>{{task.title}}</td>
-        <td>{{task.description}}</td>
-        <td>
-          <a class="action-icon" href="{% url 'task' task.id %}"><i class="fa-solid fa-eye"></i></a>
-          <a class="action-icon" href="{% url 'task-update' task.id %}"><i class="fa-solid fa-pen"></i></a>
-          <a class="action-icon" href="{% url 'task-delete' task.id %}"><i class="fa-solid fa-trash"></i></a>
-        </td>
-      </tr>
-      {% empty %}
-      <h3>No items in list</h3>
-      {% endfor %}
-    </tbody>
-  </table> -->
