@@ -3,28 +3,43 @@
 {% block title %}Task details{% endblock %}
 
 {% block content %}
-<div class="d-flex flex-column w-100 bg-todo m-auto p-lg-2 border rounded-3">
-    <div class="d-flex align-items-center justify-content-center position-relative">
-        <a class="position-absolute start-0 back-arrow" href="{% url 'task-list' %}">
+<div class="context-wrapper" style="width: 700px;">
+    <div class="context-header-wrapper">
+        <a class="back-icon" href="{% url 'task-list' %}">
             <i class="fa-solid fa-arrow-left"></i>
         </a>
         <h1 class="text-center">Task detail</h2>
     </div>
-    {% if action_count == 0 %}
-   <h4>At this moment no actions!</h1>
-    {% else %}
-    <h3>Nazwa zadania - {{ task.title }}</h3>
-    <h5>Opis zadania - {{ task.description }}</h3>
-    <h5>Liczba akcji w tasku - {{ action_count }}</h5>
-    <h5>Status zadania - 
-        {% if  task.complete == False %}
-        W trakcie
-        {% else %}
-        Zakończone
-        {% endif %}
-    </h5>
-    <h6>Całkowity czas trwania zadań to {{actions_count}}</h6>
-
-    {% endif %}
+    <div class="context-body-wrapper">
+        <div class="detail-list">
+            {% if action_count == 0 %}
+                <h2>At this moment no actions!</h2>
+            {% else %}
+            <div class="detail-table">
+                <div class="detail-table-header-row">
+                    <div class="detail-table-cell">Nazwa zadania</div>
+                 </div>
+                <div class="detail-table-div-row">
+                    <div class="detail-table-cell">{{ task.title }}</div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+        <button id="elo" class="button-cancel">
+        Print
+        </button>
+    </div>
 </div>
 {% endblock %}
+
+<!-- <h3>Nazwa zadania - {{ task.title }}</h3>
+<h5>Opis zadania - {{ task.description }}</h3>
+<h5>Liczba akcji w tasku - {{ action_count }}</h5>
+<h5>Status zadania - 
+    {% if  task.complete == False %}
+        W trakcie
+    {% else %}
+        Zakończone
+    {% endif %}
+</h5>
+<h6>Całkowity czas trwania zadań to {{actions_count}}</h6> -->

@@ -3,20 +3,20 @@
 {% block title %}Action create{% endblock %}
 
 {% block content %}
-<div class="form-body">
-  <div class="d-flex flex-column w-100 bg-todo m-auto p-lg-2 border rounded-3">
-      <div class="d-flex align-items-center justify-content-center position-relative">
-          <a class="position-absolute start-0 back-arrow" href="{% url 'action-list' view.kwargs.task_pk %}">
-              <i class="fa-solid fa-arrow-left"></i>
-          </a>
-          <h1 class="text-center">Action Create</h1>
-      </div>
-      <form method="POST">
+<div class="context-wrapper"  style="width:700px">
+    <div class="context-header-wrapper">
+        <a class="back-icon" href="{% url 'action-list' view.kwargs.task_pk %}">
+            <i class="fa-solid fa-arrow-left"></i>
+        </a>
+        <h2 class="text-center">Action Create</h2>
+    </div>
+    <div class="context-body-wrapper">
+      <form method="POST" class="form-wrapper">
           {% csrf_token %}
-          {{form.as_p}}
-          <input class="btn btn-primary" type="submit" value="Add">
+          {{form}}
+          <button class="button-submit" type="submit">Add</button>
       </form>
-  </div>
+    </div>
 </div>
 
 {% endblock %}

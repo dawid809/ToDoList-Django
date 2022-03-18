@@ -3,43 +3,40 @@
 {% block title %}Action list{% endblock %} 
 
 {% block content %}
-<div
-  class="d-flex flex-column w-100 bg-todo m-auto border rounded-3"
->
-  <div class="task-header">
-      <div class="d-flex align-items-center justify-content-center position-relative">
-        <a class="position-absolute start-0 back-arrow" href="{% url 'task-list'%}">
-            <i class="fa-solid fa-arrow-left"></i>
-          </a>
-            <h1 class="text-center">{{task_name|upper}}</h1>
-            <a href="{% url 'action-create' view.kwargs.task_pk %}" class="add-button" style="margin-left: 20px;">
-              <i class="fa-solid fa-plus"></i>
-            </a>
+<div class="context-wrapper" style="width:800px">
+  <div class="context-header-wrapper">
+      <a class="back-icon" href="{% url 'task-list'%}">
+        <i class="fa-solid fa-arrow-left"></i>
+      </a>
+      <h2>{{task_name|upper}}</h2>
+      <a href="{% url 'action-create' view.kwargs.task_pk %}" class="add-icon" style="position:absolute;right:20px;">
+        <i class="fa-solid fa-plus"></i>
+      </a>
     </div>
-  </a>
-  </div>
-  <div class="task-item-wrapper">
-    <div class="d-flex align-items-center justify-content-between p-3"></div>
     {% if actions %}
-    {% for action in actions %}
-    <div class="task-wrapper">
-      <div class="task-title">
-           <a  href="{% url 'action-update' action.task.id action.id %}">
+    <div class="list-wrapper">
+      {% for action in actions %}
+      <div class="single-item-wrapper">
+        <div class="item-title">
+            <a  href="{% url 'action-update' action.task.id action.id %}">
             {{action.name}}
             </a>
-          </div>
-            <a class="action-icon" href="{% url 'action-delete' action.task.id action.id %}"
-              ><i class="fa-solid fa-trash"></i
-            ></a>
+        </div>
+        <div class="item-actions-wrapper">
+            <a href="{% url 'action-delete' action.task.id action.id %}">
+              <i class="fa-solid fa-trash"></i>
+            </a>
+        </div>
       </div>
     {% endfor %}
+  </div>
     {% else %}
-    <div class="task-wrapper">
-        <div class="task-title">
-          <h4>At this moment no actions yet!</h1>
-        </div>
+    <div class="context-body-wrapper">
+      <div class="detail-list">
+          <h2>At this moment no actions in list yet!</h2>
+      </div>
     </div>
     {% endif %}
-  </div>
 </div>
+
 {% endblock %}

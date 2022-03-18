@@ -20,7 +20,21 @@ body {
   background-color: var(--gray);
   color: var(--white);
   box-sizing: border-box;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  height: calc(100vh - 120px);
 }
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 120px;
+  position: relative;
+  align-items: center;
+  height: 100%;
+}
+
 
 /* Header */
 
@@ -29,18 +43,24 @@ body {
   border-bottom: 1px solid var(--gray-darker);
   height: 60px;
   position: fixed;
+  padding: 0 30px;
   top: 0;
   left: 0;
   right: 0;
 }
 
 .header ul {
-  list-style-type: none;
   display: flex;
-  justify-content: flex-end;
-  height: 100%;
+  list-style-type: none;
+  justify-content: space-between;
   align-items: center;
-  margin-right: 20px;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.header-item {
+  text-transform: capitalize;
 }
 
 .header ul li {
@@ -79,12 +99,17 @@ body {
   background-color: var(--gray);
 }
 
-.dropdown-menu {
+.dropdown-menu.show {
+  padding: 0;
   background-color: var(--gray-light);
+  overflow: hidden;
+  z-index: 1000;
 }
 
 .dropdown-item {
   color: var(--white);
+  padding: 5px 10px;
+  text-align: center;
 }
 
 .dropdown-item:hover {
@@ -94,20 +119,11 @@ body {
 
 /* Context */
 
-.main-container {
-  display: flex;
-  flex-direction: column;
-  margin-top: 120px;
-  position: relative;
-  align-items: center;
-  justify-content: center;
-}
-
 .context-wrapper {
 border: 1px solid var(--black);
-border-radius: 12px;
-overflow: hidden;
 width: 500px;
+/* border-radius: 12px;
+overflow: hidden; */
 }
 
 .context-header-wrapper {
@@ -318,7 +334,11 @@ background-color: var(--main-hover);
 }
 
 .form-wrapper input[type="checkbox"] {
-  float: left;
+width: 20px;
+height: 20px;
+transform: translateY(25%);
+margin-left: 5px;
+/* transform: translateX(-49%); */
 }
 
 /* Forms */
@@ -396,3 +416,66 @@ color: var(--black);
   .button-delete-confirm:hover {
   background-color: var(--red-hover);
   }
+
+  /* Detail list */
+
+  .detail-list {
+
+  }
+
+  .detail-list h2 {
+    font-style: italic;
+  }
+
+  .detail-table {
+    display: table;
+    width:auto;
+    background-color:#eee;
+    border:1px solid  #666666;
+    border-spacing:5px;
+  }
+
+  .detail-table-header-row {
+
+  }
+
+  .detail-table-div-row {
+    display:table-row;
+    width:auto;
+  }
+
+  .detail-table-cell {
+    float: left;
+    display:table-column;
+    width:200px;
+    background-color:#ccc;
+  }
+
+
+  /* Timepicker */
+.input-group-addon {
+  background-color: var(--white);
+}
+
+.input-group-addon:hover {
+  background-color: var(--main-hover);
+  color: var(--white);
+}
+
+.glyphicon.glyphicon-time {
+  font-size: 24px;
+}
+
+
+
+
+
+
+
+
+
+
+.bootstrap-datetimepicker-widget.dropdown-menu.usetwentyfour.bottom{
+}
+
+

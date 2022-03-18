@@ -22,13 +22,21 @@
     <div class="single-item-wrapper">
       {% if task.complete %}
       <div class="item-title">
-        <div class="task-complete-icon"></div>
+        <div class="task-complete-icon toggle-complete" onclick="toggle(this)"></div>
         <s><a href="{% url 'task-update' task.id %}"><i>{{task}}</i></a
         ></s>
       </div>
+      <script type="text/javascript" nonce="">
+        function toggle(el) {
+          console.log('clickde')
+          console.log(el)
+          el.classList.toggle("task-incomplete-icon")
+          let a = {task};
+          console.log(a);
+        }</script>
       {% else %}
       <div class="item-title">
-        <div class="task-incomplete-icon"></div>
+        <div class="task-incomplete-icon toggle-complete"></div>
         <a  href="{% url 'task-update' task.id %}">{{task}}</a>
       </div>
       {% endif %}
@@ -48,3 +56,4 @@
   </div>
 </div>
 {% endblock %}
+

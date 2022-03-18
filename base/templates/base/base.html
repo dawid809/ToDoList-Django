@@ -33,24 +33,26 @@
 
 <body>
   <header class="header">
-    <ul class="d-flex justify-content-between">
+    <ul>
       {% if request.user.is_authenticated %}
-      <div style="display: flex;">
-        <li><a href="/">Home</a></li>
-      
-      </div>
+      <li>
+        <a href="/">Home</a>
+      </li>
       <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
         aria-haspopup="true" aria-expanded="false">
-      <span class="text-capitalize">   ({{request.user}})</h1>
+        <span class="header-item">({{request.user}})</span> 
       </a>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
         <a class="dropdown-item" href="#">Options</a>
         <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
       </div>
-      </div>
       {% else %}
-      <li><a href="/">Home</a></li>
-      <li><a href="{% url 'login' %}">Login</a></li>
+      <li>
+        <a href="/">Home</a>
+      </li>
+      <li>
+        <a href="{% url 'login' %}">Login</a>
+      </li>
       {% endif %}
     </ul>
   </header>
@@ -58,7 +60,29 @@
       {% block content %}
       {% endblock %}
   </div>
-  <!-- <script src="{% static 'dist/js/bootstrap.min.js' %}"></script> -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+  <!-- <script type="text/javascript" nonce="">
+    // let t = document.getElementById('elo')
+    
+    // t.addEventListener('click', () => {
+    //   print();
+    // })
+
+    function toggle(el) {
+      console.log('clickde')
+      console.log(el)
+      console.log(task)
+      el.classList.toggle("task-incomplete-icon")
+    }
+
+    let toggle2 = document.getElementsByClassName('toggle-complete');
+    console.log(toggle2);
+    // let t = document.getElementById('elo');
+    // t.addEventListener('click', () => {
+    //   print('clicked');
+    // })
+    // print(t);
+    // print('hello');
+  </script> -->
 </body>
 </html>
