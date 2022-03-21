@@ -22,18 +22,20 @@
     <div class="single-item-wrapper">
       {% if task.complete %}
       <div class="item-title">
-        <div class="task-complete-icon toggle-complete" onclick="toggle(this)"></div>
+        <div class="task-complete-icon toggle-complete" onclick="toggleComplete(this)"></div>
         <s><a href="{% url 'task-update' task.id %}"><i>{{task}}</i></a
         ></s>
       </div>
+      <!-- Script - po zrobieniu do osobnego pliku -->
       <script type="text/javascript" nonce="">
-        function toggle(el) {
-          console.log('clickde')
-          console.log(el)
+        function toggleComplete(el) {
+          console.log('clicked');
+          console.log(el);
           el.classList.toggle("task-incomplete-icon")
-          let a = {task};
+          let a = task;
           console.log(a);
-        }</script>
+          }
+      </script>
       {% else %}
       <div class="item-title">
         <div class="task-incomplete-icon toggle-complete"></div>

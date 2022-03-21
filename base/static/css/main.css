@@ -120,7 +120,7 @@ body {
   padding: 0;
   overflow: hidden;
   background-color: var(--bg-color);
-  border: 1px solid var(--border-color);
+  box-shadow: 0px 0px 3px var(--border-color);
   z-index: 1000;
 }
 
@@ -309,6 +309,7 @@ color: var(--border-color);
   width: 150px;
   padding: 12px 24px;
   border-radius: 4px;
+  font-weight: 500;
   border: none;
   background-color: var(--main);
   color: inherit;
@@ -353,6 +354,7 @@ color: var(--border-color);
   width: 100%;
   color: var(--font-color);
   font-size: 20px;
+  font-weight: 500;
   border: none;
   border-radius: 20px;
 }
@@ -481,7 +483,7 @@ font-style: italic;
     grid-row: 1;
     grid-column: 1/-1 ;
     grid-template-columns: repeat(5, 1fr);
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color2);
     background-color: var(--bg-color2);
     padding: 10px;
   }
