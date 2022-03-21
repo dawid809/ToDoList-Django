@@ -157,7 +157,12 @@ border-radius: 12px 12px 0 0;
 }
 
 .context-header-wrapper h2 {
-text-transform: uppercase;
+color: var(--main);
+text-transform: capitalize;
+}
+
+.context-header-wrapper h4 {
+color: var(--border-color);
 }
 
 .context-body-wrapper {

@@ -8,7 +8,7 @@
         <a class="back-icon" href="{% url 'task-list' %}">
             <i class="fa-solid fa-arrow-left"></i>
         </a>
-        <h1 class="text-center">Task detail</h2>
+        <h2>Task detail</h2>
     </div>
     <div class="context-body-wrapper">
             {% if action_count == 0 %}
@@ -42,54 +42,3 @@
     </div>
 </div>
 {% endblock %}
-
-<!-- <div class="detail-table">
-    <div class="detail-table-header-row">
-        <div class="detail-table-cell">Task name</div>
-     </div>
-    <div class="detail-table-div-row">
-        <div class="detail-table-cell">{{ task.title }}</div>
-    </div>
-    <div class="detail-table-header-row">
-        <div class="detail-table-cell">Task description</div>
-     </div>
-    <div class="detail-table-div-row">
-        <div class="detail-table-cell">{{ task.description }}</div>
-    </div>
-    <div class="detail-table-header-row">
-        <div class="detail-table-cell">Action count</div>
-     </div>
-    <div class="detail-table-div-row">
-        <div class="detail-table-cell">{{ action_count }}</div>
-    </div>
-    <div class="detail-table-header-row">
-        <div class="detail-table-cell">Task status</div>
-     </div>
-    <div class="detail-table-div-row">
-        <div class="detail-table-cell">
-            {% if  task.complete == False %}
-                W trakcie
-            {% else %}
-                Zakończone
-            {% endif %}
-        </div>
-    </div>
-    <div class="detail-table-header-row">
-        <div class="detail-table-cell">Total task duration</div>
-     </div>
-    <div class="detail-table-div-row">
-        <div class="detail-table-cell">{{total_duration}}</div>
-    </div>
-</div> -->
-
-<!-- <h3>Nazwa zadania - {{ task.title }}</h3>
-<h5>Opis zadania - {{ task.description }}</h3>
-<h5>Liczba akcji w tasku - {{ action_count }}</h5>
-<h5>Status zadania - 
-    {% if  task.complete == False %}
-        W trakcie
-    {% else %}
-        Zakończone
-    {% endif %}
-</h5>
-<h6>Całkowity czas trwania zadań to {{actions_count}}</h6> -->
