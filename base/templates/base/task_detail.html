@@ -3,7 +3,7 @@
 {% block title %}Task details{% endblock %}
 
 {% block content %}
-<div class="context-wrapper" style="width: 700px;">
+<div class="context-wrapper" style="width: 1000px;">
     <div class="context-header-wrapper">
         <a class="back-icon" href="{% url 'task-list' %}">
             <i class="fa-solid fa-arrow-left"></i>
@@ -11,26 +11,76 @@
         <h1 class="text-center">Task detail</h2>
     </div>
     <div class="context-body-wrapper">
-        <div class="detail-list">
             {% if action_count == 0 %}
+            <div class="detail-list">
                 <h2>At this moment no actions!</h2>
+            </div>    
             {% else %}
-            <div class="detail-table">
-                <div class="detail-table-header-row">
-                    <div class="detail-table-cell">Nazwa zadania</div>
+            <div class="detail-container">
+                <div class="detail-header">
+                    <div class="single-head-item">Task name</div>
+                    <div class="single-head-item">Task description</div>
+                    <div class="single-head-item">Action count</div>
+                    <div class="single-head-item">Task status</div>
+                    <div class="single-head-item">Total task duration</div>
                  </div>
-                <div class="detail-table-div-row">
-                    <div class="detail-table-cell">{{ task.title }}</div>
+                <div class="detail-context">
+                    <div class="single-context-item">{{ task.title }}</div>
+                    <div class="single-context-item">{{ task.description }}</div>
+                    <div class="single-context-item">{{ action_count }}</div>
+                    <div class="single-context-item">
+                        {% if  task.complete == False %}
+                            W trakcie
+                        {% else %}
+                            Zakończone
+                        {% endif %}
+                    </div>
+                    <div class="single-context-item">{{total_duration}}</div>
                 </div>
             </div>
             {% endif %}
-        </div>
-        <button id="elo" class="button-cancel">
-        Print
-        </button>
     </div>
 </div>
 {% endblock %}
+
+<!-- <div class="detail-table">
+    <div class="detail-table-header-row">
+        <div class="detail-table-cell">Task name</div>
+     </div>
+    <div class="detail-table-div-row">
+        <div class="detail-table-cell">{{ task.title }}</div>
+    </div>
+    <div class="detail-table-header-row">
+        <div class="detail-table-cell">Task description</div>
+     </div>
+    <div class="detail-table-div-row">
+        <div class="detail-table-cell">{{ task.description }}</div>
+    </div>
+    <div class="detail-table-header-row">
+        <div class="detail-table-cell">Action count</div>
+     </div>
+    <div class="detail-table-div-row">
+        <div class="detail-table-cell">{{ action_count }}</div>
+    </div>
+    <div class="detail-table-header-row">
+        <div class="detail-table-cell">Task status</div>
+     </div>
+    <div class="detail-table-div-row">
+        <div class="detail-table-cell">
+            {% if  task.complete == False %}
+                W trakcie
+            {% else %}
+                Zakończone
+            {% endif %}
+        </div>
+    </div>
+    <div class="detail-table-header-row">
+        <div class="detail-table-cell">Total task duration</div>
+     </div>
+    <div class="detail-table-div-row">
+        <div class="detail-table-cell">{{total_duration}}</div>
+    </div>
+</div> -->
 
 <!-- <h3>Nazwa zadania - {{ task.title }}</h3>
 <h5>Opis zadania - {{ task.description }}</h3>

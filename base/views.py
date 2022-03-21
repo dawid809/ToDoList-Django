@@ -119,7 +119,7 @@ class TaskDetail(LoginRequiredMixin, DetailView):
 
         times = Action.format_timedelta(times)
         
-        context['actions_count'] = times
+        context['total_duration'] = times
         return context
 
 
